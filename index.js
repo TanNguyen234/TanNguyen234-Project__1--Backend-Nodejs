@@ -1,5 +1,10 @@
 const express = require("express");//import express vì là file index chính của project
+const mongoose = require("mongoose");
 require('dotenv').config();
+
+const database = require("./config/database");
+
+database.connect(); 
 
 const route = require("./routes/client/index.route.js");//import file route chính chứa tất cả các route
 
