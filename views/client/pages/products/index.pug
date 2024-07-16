@@ -8,12 +8,14 @@ block main
         .col-12 
           +box-head("Danh sách sản phẩm")
       .row 
-        .col-4.mb-3 
+       each item in products
+        .col-3.mb-3 
           .product-item
             .inner-img 
-              img(src='https://up.yimg.com/ib/th?id=OIP.cN99ckW5sNZ8oZESuFbRtQHaEK&pid=Api&rs=1&c=1&qlt=95&w=210&h=118', alt="") 
+              img(src=item.thumbnail, alt=item.title) 
             .inner-content 
-              h3.inner-title iphone XX 
-              .inner-price-new 1000$
-              .inner-price-old 1500$
-              .inner-discount -33%
+              h3.inner-title #{item.title}
+              .inner-price-new #{item.priceNew}$
+              .inner-price-old #{item.price}$
+              .inner-discount #{item.discountPercentage}%
+        
