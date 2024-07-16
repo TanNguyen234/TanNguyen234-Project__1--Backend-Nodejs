@@ -9,6 +9,8 @@ const port = process.env.PORT;
 app.set("views", "./views");//Thiết lập vào thắng folder views vì view là folder show ra website
 app.set("view engine", "pug");//Template engine có thể là PUG, EJS, Handlebars...
 
+app.use(express.static("public"));// Nhúng file tĩnh để để hiểu rằng folder public chứa file tĩnh để public ra bên ngoài
+
 //Routes
 route(app);//sử dụng route truyền app vào để sử dụng ở file index.route.js
 
