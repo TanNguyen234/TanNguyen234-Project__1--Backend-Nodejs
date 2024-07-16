@@ -1,5 +1,19 @@
 extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
 
 block main 
   //Dùng chung layout-default nên phải Templete Inheritance
-  h1 Trang danh sách sản phẩm
+  .container.my-3 
+      .row 
+        .col-12 
+          +box-head("Danh sách sản phẩm")
+      .row 
+        .col-4.mb-3 
+          .product-item
+            .inner-img 
+              img(src='https://up.yimg.com/ib/th?id=OIP.cN99ckW5sNZ8oZESuFbRtQHaEK&pid=Api&rs=1&c=1&qlt=95&w=210&h=118', alt="") 
+            .inner-content 
+              h3.inner-title iphone XX 
+              .inner-price-new 1000$
+              .inner-price-old 1500$
+              .inner-discount -33%
