@@ -1,5 +1,6 @@
 const Product = require('../../models/product.model');
 
+//[GET] /products
 module.exports.index = async (req, res) => {//Tên hàm controller ở đây là index là file chính của product
 
     const products = await Product.find({   //Lọc product
