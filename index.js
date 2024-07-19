@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const database = require("./config/database");
 
+const systemConfig = require('./config/system')
+
 database.connect(); 
 
 const routeAdmin = require('./routes/admin/index.route.js')//import routes chính của admin
@@ -15,6 +17,9 @@ const port = process.env.PORT;
 
 app.set("views", "./views");//Thiết lập vào thắng folder views vì view là folder show ra website
 app.set("view engine", "pug");//Template engine có thể là PUG, EJS, Handlebars...
+
+// App Local Variables
+app.locals.prefixAdmin = systemConfig.prefixAdmin;//Tạo biến toàn cục dùng được ở mọi file pug để linh hoạt path
 
 app.use(express.static("public"));// Nhúng file tĩnh để để hiểu rằng folder public chứa file tĩnh để public ra bên ngoài
 
