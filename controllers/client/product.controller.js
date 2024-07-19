@@ -2,7 +2,7 @@ const Product = require('../../models/product.model');
 
 module.exports.index = async (req, res) => {//Tên hàm controller ở đây là index là file chính của product
 
-    const products = await Product.find({
+    const products = await Product.find({   //Lọc product
         status: 'active',
         deleted: false
     });
