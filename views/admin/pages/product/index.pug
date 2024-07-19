@@ -3,6 +3,13 @@ extends ../../layouts/default.pug
 block main 
   h1 Trang Danh sách sản phẩm
 
+  .card.mb-3
+    .card-header Bộ loc và Tìm kiếm
+    .card-body
+
+      each item in filterStatus
+       button(class=`btn btn-sm ml-1 btn-outline-success ${item.class}` button-status=item.status) #{item.name}
+
   table.table.table-hover.table-sm
     thead
       tr 
@@ -30,14 +37,3 @@ block main
          td
            button(class="btn btn-warning btn-sm") Sửa 
            button(class="btn btn-danger btn-sm ml-1") Xóa 
-      //-  tr 
-      //-    td 2
-      //-    td
-      //-      img(src="https://cdn.dummyjson.com/products/images/smartphones/Vivo%20X21/thumbnail.png" alt="smartphones" width="100px" height="auto")
-      //-    td Sản phẩm 2
-      //-    td 200$
-      //-    td
-      //-      a(href="#" class="badge badge-danger") Dừng hoạt động 
-      //-    td
-      //-      button(class="btn btn-warning btn-sm") Sửa 
-      //-      button(class="btn btn-danger btn-sm ml-1") Xóa 
