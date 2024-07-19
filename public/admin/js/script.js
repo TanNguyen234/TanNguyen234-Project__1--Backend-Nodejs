@@ -20,3 +20,26 @@ if(buttonStatus.length > 0) {
     })
 }
 //End Button Status
+
+// Form Search 
+const formSearch = document.querySelector('#form-search');
+if (formSearch) {
+
+    let url = new URL(window.location.href);
+
+    formSearch.addEventListener('submit', (e) => {
+
+        e.preventDefault();
+
+        const keyword = e.target.elements.keyword.value;
+
+        if(keyword){
+            url.searchParams.set("keyword", keyword);  //Thêm param status
+        } else {
+            url.searchParams.delete("keyword"); //Xóa param status
+        }
+
+        window.location.href = url;
+    })
+}
+// End Form Search 
