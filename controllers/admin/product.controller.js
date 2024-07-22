@@ -21,12 +21,30 @@ module.exports.index = async (req, res) => {
         find.title = objectSearch.regex;
     }
 
-    const products = await Product.find(find)   //Dùng find để lọc các dữ liệu từ database
+    //Pagination
+    let objectPagination = {
+        currentPage: 1,
+        limitItem: 4
+    }
+
+    if(req.query.page) {
+        objectPagination.currentPage = parseInt(req.query.page);
+    }
+
+    objectPagination.skip = ((objectPagination.currentPage - 1) * objectPagination.limitItem);
+
+    const countProducts = await Product.countDocuments(find); // Hàm count trong mongoose để tổng số sản phẩm
+    const totalPage = Math.ceil(countProducts/objectPagination.limitItem);
+    objectPagination.totalPage = totalPage;
+    //End Pagination
+
+    const products = await Product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);   //Dùng find(hàm của mongoose) để lọc các dữ liệu từ database
 
     res.render('admin/pages/product/index', {   //Truyền ngược các giá trị lại View
         pageTitle: 'Danh sản phẩm',
         products: products,
         filterStatus: filterStatus,
-        keyword: objectSearch.keyword
+        keyword: objectSearch.keyword,
+        pagination: objectPagination
     })
 }
