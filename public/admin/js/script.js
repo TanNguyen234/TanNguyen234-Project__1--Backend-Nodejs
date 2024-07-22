@@ -28,7 +28,6 @@ if (formSearch) {
     let url = new URL(window.location.href);
 
     formSearch.addEventListener('submit', (e) => {
-
         e.preventDefault();
 
         const keyword = e.target.elements.keyword.value;
@@ -42,4 +41,4 @@ if (formSearch) {
         window.location.href = url;
     })
 }
-// End Form Search 
+// End Form Search  
