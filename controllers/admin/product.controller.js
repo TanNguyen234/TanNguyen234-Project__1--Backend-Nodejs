@@ -1,33 +1,11 @@
 const Product = require('../../models/product.model');
 
+const filterStatusHelper = require('../../helpers/filterStatus');
+
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
     
-    let filterStatus = [                  //Tạo bộ lộc trang thái để thêm class active cho nó để nó có tính navigate
-        {
-            name: "Tất cả",
-            status: "",
-            class: ""    
-        },
-        {
-            name: "Hoạt động",
-            status: "active",
-            class: "" 
-        },
-        {
-            name: "Dừng hoạt động",
-            status: "inactive",
-            class: ""
-        }
-    ]
-
-    if(req.query.status) {                   //Nếu url có key tên status
-        const index = filterStatus.findIndex(item => item.status == req.query.status);//Tìm index trong object filterStatus phần tử mà có giá trị giống giá trị của status trên url
-        filterStatus[index].class = "active";                                        //Cho phần tử có giá tri giống trên key url class là active
-    } else {
-        const index = filterStatus.findIndex(item => item.status == '');             //Ngược lại nếu không có key status trên url  thì tìm phần tử có status="" trong filterStatus 
-        filterStatus[index].class = "active";                                        // Có nghĩ là item có status.name="Tất cả" có class="active"
-    }
+    const filterStatus = filterStatusHelper(req.query);  //Trả về một mảng chứa các trạng thái của sản phẩm
 
     let find = {                       //Tạo object dể tìm kiếm những sp chưa xóa
         deleted: false
