@@ -40,3 +40,16 @@ module.exports.index = async (req, res) => {
         pagination: objectPagination
     })
 }
+
+// [GET] /admin/products/change-status/:status/:id  
+module.exports.changeStatus = async (req, res) => {
+    console.log(req.params);        //Chứa các routes động
+    
+    const status = req.params.status;
+    const id = req.params.id;
+
+    await Product.updateOne({ _id: id }, { status: status })//Do id trong database là _id nên ghi _id và updateOne là hàm mongoose
+
+    // res.redirect("/admin/products");//Hàm express để chuyển hướng
+    res.redirect("back");
+}
