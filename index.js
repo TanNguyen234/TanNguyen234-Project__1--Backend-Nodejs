@@ -1,5 +1,6 @@
 const express = require("express");//import express vì là file index chính của project
 const methodOverride = require('method-override');//Nhúng methodOverride để ghi đè
+const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
 require('dotenv').config();
@@ -15,6 +16,9 @@ const route = require("./routes/client/index.route.js");//import file route chí
 
 const app = express();
 const port = process.env.PORT;
+
+//parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended : false}));;
 
 app.use(methodOverride("_method")); //Sử dụng library method override
 

@@ -41,7 +41,7 @@ module.exports.index = async (req, res) => {
     })
 }
 
-// [GET] /admin/products/change-status/:status/:id  
+// [PATCH] /admin/products/change-status/:status/:id  
 module.exports.changeStatus = async (req, res) => {
     console.log(req.params);        //Chứa các routes động
     
@@ -51,5 +51,25 @@ module.exports.changeStatus = async (req, res) => {
     await Product.updateOne({ _id: id }, { status: status })//Do id trong database là _id nên ghi _id và updateOne là hàm mongoose
 
     // res.redirect("/admin/products");//Hàm express để chuyển hướng
+    res.redirect("back");
+}
+
+// [PATCH] /admin/products/change-multi
+module.exports.changeMulti = async (req, res) => {
+    const type = req.body.type;
+    const ids = req.body.ids.split(', '); //conver từ string thành array
+
+    switch (type) {
+        case "active":
+            await Product.updateMany({ _id: { $in : ids} }, { status: "active" })
+           break;
+        case "inactive":
+            await Product.updateMany({ _id: { $in : ids} }, { status: "inactive" })
+           break;
+        default:
+            break;
+    }
+    
+
     res.redirect("back");
 }
