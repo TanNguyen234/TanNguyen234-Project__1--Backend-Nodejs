@@ -6,7 +6,7 @@ module.exports.index = async (req, res) => {//Tên hàm controller ở đây là
     const products = await Product.find({   //Lọc product
         status: 'active',
         deleted: false
-    });
+    }).sort({position: "desc"});
 
     const newProducts = products.map(item => {
         item.priceNew = item.price - (item.price*item.discountPercentage/100).toFixed(1);

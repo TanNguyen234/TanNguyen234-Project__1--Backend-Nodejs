@@ -116,12 +116,22 @@ if(formChangeMulti) {
                 return;
             }
         }
+
         if(inputsChecked.length > 0) {
             let ids = [];
             const inputIds = formChangeMulti.querySelector('input[name="ids"]');
             
             inputsChecked.forEach(input => {
-                ids.push(input.defaultValue);
+                const id = input.value;
+
+                if(typeChange == "change-position") {
+                    const position = input.closest('tr').querySelector('input[name="position"]').value;//input.closest('tr') là đi ra thẻ cha "tr" gần nhât
+                    
+                    ids.push(`${id}-${position}`);
+                } else {
+                    ids.push(input.defaultValue);
+                }
+               
             })
 
             inputIds.value = ids.join(', ') //Vì giá trị của input không thể là array nên convert thành string
