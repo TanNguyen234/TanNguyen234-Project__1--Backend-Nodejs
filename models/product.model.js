@@ -10,7 +10,8 @@ const schemaProduct = new mongoose.Schema({//Thiết lập schema
   thumbnail: String,
   status: String,
   position: Number,
-  deleted: Boolean
+  deleted: Boolean,
+  deleteAt: Date
 });
 
 const Product = mongoose.model("Product", schemaProduct, "products"); //Kết nối tới collection có tên products
