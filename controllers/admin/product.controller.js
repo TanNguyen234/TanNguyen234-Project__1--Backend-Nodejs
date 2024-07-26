@@ -70,6 +70,14 @@ module.exports.changeMulti = async (req, res) => {
             break;
     }
     
-
     res.redirect("back");
 }
+ //[DELETE] /admin/products/delete/:id
+
+ module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    
+    await Product.deleteOne({ _id: id });
+
+    res.redirect("back");
+ }

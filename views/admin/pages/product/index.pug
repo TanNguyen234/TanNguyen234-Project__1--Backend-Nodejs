@@ -54,10 +54,12 @@ block main
            
          td
            button(class="btn btn-warning btn-sm") Sửa 
-           button(class="btn btn-danger btn-sm ml-1") Xóa 
+           button(class="btn btn-danger btn-sm ml-1" data-id=item.id button-delete) Xóa 
   +pagination(pagination)
 
   form(action="" method="POST" id="form-change-status" data-path=`${prefixAdmin}/products/change-status`)-// form change
+
+  form(action="" method="POST" id="form-delete-item" data-path=`${prefixAdmin}/products/delete`)-// form delete one
 
   script(src="/admin/js/product.js")  
       

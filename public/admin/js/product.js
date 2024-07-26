@@ -21,3 +21,27 @@ if(buttonsChangeStatus.length > 0) {
     })
 }
 //End Change Status
+
+//Delete Product
+const buttonsDelete = document.querySelectorAll('[button-delete]');
+
+if(buttonsDelete.length > 0) {
+    const formDeleteItem = document.querySelector('#form-delete-item');
+    const path = formDeleteItem.getAttribute("data-path");
+
+    buttonsDelete.forEach(button => {
+        button.addEventListener('click', () => {
+
+            const isConfirm = confirm("Are you sure you want to delete this product?");
+            
+            if(isConfirm) {
+                const id = button.getAttribute('data-id');
+
+                formDeleteItem.action = `${path}/${id}?_method=DELETE`; 
+                
+                formDeleteItem.submit();
+            }
+        })
+    })
+}
+//End Delete Product
