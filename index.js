@@ -1,7 +1,9 @@
 const express = require("express");//import express vì là file index chính của project
 const methodOverride = require('method-override');//Nhúng methodOverride để ghi đè
 const bodyParser = require('body-parser');
-const mongoose = require("mongoose");
+const flash = require('express-flash');
+const cookieParser = require('cookie-parser');// thư viện này để parser khi server phản hồi về view
+const session = require('express-session'); 
 
 require('dotenv').config();
 
@@ -13,6 +15,7 @@ database.connect();
 
 const routeAdmin = require('./routes/admin/index.route.js')//import routes chính của admin
 const route = require("./routes/client/index.route.js");//import file route chính chứa tất cả các route
+const { getMaxListeners } = require("./models/product.model.js");
 
 const app = express();
 const port = process.env.PORT;
@@ -24,6 +27,11 @@ app.use(methodOverride("_method")); //Sử dụng library method override
 
 app.set("views", "./views");//Thiết lập vào thắng folder views vì view là folder show ra website
 app.set("view engine", "pug");//Template engine có thể là PUG, EJS, Handlebars...
+
+//Flash thư viện cho thông báo cho express js
+app.use(cookieParser("YSUDGSGDJSGDJ"));//key ngâu nhiên cho tăng tính bảo mật
+app.use(session({ cookie: {maxAge : 60000} }));//Thời gian cookie tồn tại 60000 ml giây
+app.use(flash());
 
 // App Local Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;//Tạo biến toàn cục dùng được ở mọi file pug để linh hoạt path
