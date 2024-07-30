@@ -11,4 +11,8 @@ router.patch("/change-multi", controller.changeMulti);
 
 router.delete("/delete/:id", controller.deleteItem);
 
+router.get("/create", controller.create);//Get để lấy trang tạo sp
+
+router.post("/create", controller.createPost);//Có thể trùng route nhưng phải khác phương thức
+
 module.exports = router;//export hàm router

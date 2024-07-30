@@ -34,7 +34,7 @@ app.use(session({ cookie: {maxAge : 60000} }));//Thời gian cookie tồn tại 
 app.use(flash());
 
 // App Local Variables
-app.locals.prefixAdmin = systemConfig.prefixAdmin;//Tạo biến toàn cục dùng được ở mọi file pug để linh hoạt path
+app.locals.prefixAdmin = systemConfig.prefixAdmin;//Tạo biến toàn cục dùng được ở mọi file [pug] để linh hoạt path
 
 app.use(express.static("public"));// Nhúng file tĩnh để để hiểu rằng folder public chứa file tĩnh để public ra bên ngoài
 
