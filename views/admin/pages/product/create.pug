@@ -4,7 +4,7 @@ block main
 
  h1 Thêm mới sản phẩm
 
- form(id="form-create-product" method="POST" action=`${prefixAdmin}/products/create`)
+ form(id="form-create-product" method="POST" action=`${prefixAdmin}/products/create` enctype="multipart/form-data")-// Thư viện upload multer
    .form-group 
      label(for="title") Tiêu đề
      input(type="text" class="form-control" id="title" name="title" required)
@@ -22,7 +22,8 @@ block main
      input(type="number" class="form-control" id="stock" name="stock" value="0" min="0")
    .form-group 
      label(for="thumbnail") Ảnh
-     input(type="text" class="form-control" id="thumbnail" name="thumbnail")
+     input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*")
+     -//type="file" and accept="image/* và class="form-control-file" của boostrap để css
    .form-group 
      label(for="position") Vị trí
      input(type="number" class="form-control" id="position" name="position" min="1" placeholder="Tự động tăng")

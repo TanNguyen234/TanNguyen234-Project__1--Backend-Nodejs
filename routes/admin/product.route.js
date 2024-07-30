@@ -1,5 +1,9 @@
 const express = require('express');//import express để dùng hàm express.Router()
+const multer = require('multer');//import multer
+const storeMulter = require('../../helpers/storeMulter');
 const router = express.Router();
+const upload = multer({ storage : storeMulter()});//đường dẫn lưu ảnh upload tính từ folder ngoài cùng đi vào
+//StoreMulter la ham custon file name
 
 const controller = require('../../controllers/admin/product.controller.js');
 
@@ -13,6 +17,6 @@ router.delete("/delete/:id", controller.deleteItem);
 
 router.get("/create", controller.create);//Get để lấy trang tạo sp
 
-router.post("/create", controller.createPost);//Có thể trùng route nhưng phải khác phương thức
+router.post("/create", upload.single('thumbnail'), controller.createPost);//Có thể trùng route nhưng phải khác phương thức
 
 module.exports = router;//export hàm router
