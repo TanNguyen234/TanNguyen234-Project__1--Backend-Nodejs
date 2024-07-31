@@ -20,10 +20,15 @@ block main
    .form-group 
      label(for="stock") Số lượng
      input(type="number" class="form-control" id="stock" name="stock" value="0" min="0")
-   .form-group 
+   div(class="form-group" upload-image)
      label(for="thumbnail") Ảnh
-     input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*")
+     input(type="file" class="form-control-file" upload-image-input id="thumbnail" name="thumbnail" accept="image/*")
+     div 
+       img(src="" class="upload-image-preview" upload-image-preview alt="")
+       span x
+
      -//type="file" and accept="image/* và class="form-control-file" của boostrap để css
+
    .form-group 
      label(for="position") Vị trí
      input(type="number" class="form-control" id="position" name="position" min="1" placeholder="Tự động tăng")

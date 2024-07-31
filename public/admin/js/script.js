@@ -153,9 +153,9 @@ if(showAlert) {
     setTimeout(() =>{
         showAlert.classList.add('alert-hidden');
     }, time)
-}
 
-const closeAlert = showAlert.querySelector('[close-alert]');
+    var closeAlert = showAlert.querySelector('[close-alert]');
+}
 
 if(closeAlert) {
     closeAlert.addEventListener('click', () => {
@@ -163,3 +163,29 @@ if(closeAlert) {
     })
 }
 // End Show Alert 
+
+//Upload Image //Tạo preview ảnh trước khí upload [(google search)]
+const uploadImage = document.querySelector('[upload-image]');
+
+if(uploadImage) {
+    const uploadImageInput = uploadImage.querySelector('[upload-image-input]');
+    const uploadImagePreview = uploadImage.querySelector('[upload-image-preview]');
+
+    uploadImageInput.addEventListener('change', (e) => {
+
+        uploadImage.children[2].style.display = 'flex';
+        const x = uploadImage.children[2].children[1];
+        let file = e.target.files[0];
+        
+        if(file) {
+            uploadImagePreview.src = URL.createObjectURL(file)//Hàm tạo đường dẫn ảnh
+        }
+
+        x.addEventListener('click', (e) => {
+            uploadImagePreview.src = ""
+            uploadImage.children[2].style.display = 'none';
+            uploadImageInput.value = "";
+        })
+    })
+}
+//End Upload Image
