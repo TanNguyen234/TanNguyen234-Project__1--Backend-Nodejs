@@ -120,9 +120,15 @@ module.exports.create = async (req, res) => {
     })
 }
 
-// [GET] /admin/products/create
+// [POST] /admin/products/createPost
 module.exports.createPost = async (req, res) => {
-    console.log(req.file);
+    
+    if(!req.body.title) { //Validate
+        req.flash("error", `Vui lòng nhập tiêu đề!`);
+        res.redirect("back");
+        return; //Để không chạy đoạn code bên dưới mặc dù đã redirect
+    }
+
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);
@@ -134,10 +140,58 @@ module.exports.createPost = async (req, res) => {
         req.body.position = parseInt(req.body.position);
     }
 
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
+    if(req.file) {
+        req.body.thumbnail = `/uploads/${req.file.filename}`;
+    }
 
     const product = new Product(req.body);
     await product.save();
 
     res.redirect(`${systemConfig.prefixAdmin}/products`)
+}
+
+// [GET] /admin/products/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+       const find = {
+        deleted: false,
+        _id: req.params.id
+       }
+
+       const product = await Product.findOne(find);
+
+       res.render('admin/pages/product/edit', {
+        pageTitle: 'Chỉnh sửa sản phẩm',
+        product: product
+       })
+    } catch (err) {
+        req.flash("error", "Sản phẩm không tồn tại");
+        res.redirect(`${systemConfig.prefixAdmin}/products`)
+    }
+}
+
+// [PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req, res) => {//Try catch khi update, ...
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
+    req.body.position = parseInt(req.body.position);
+
+    if(!req.body.position) {
+        const countProduct = await Product.countDocuments();
+        req.body.position = countProduct + 1;
+    }
+
+    if(req.file) {
+        req.body.thumbnail = `/uploads/${req.file.filename}`;
+    }
+
+    try {
+        await Product.updateOne({ _id : req.params.id}, req.body);//Vì req.body là object nen truyen thẳng vào
+        req.flash("success" , "Sản phẩm đã được cập nhật!");
+    } catch (error) {
+        req.flash("error", "Cập nhật sản phẩm thất bại");
+    }
+
+    res.redirect(`back`)
 }

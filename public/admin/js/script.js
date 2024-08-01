@@ -170,6 +170,7 @@ const uploadImage = document.querySelector('[upload-image]');
 if(uploadImage) {
     const uploadImageInput = uploadImage.querySelector('[upload-image-input]');
     const uploadImagePreview = uploadImage.querySelector('[upload-image-preview]');
+    const update = document.querySelector('[update]');
 
     uploadImageInput.addEventListener('change', (e) => {
 
@@ -182,6 +183,7 @@ if(uploadImage) {
         }
 
         x.addEventListener('click', (e) => {
+            console.log("x");
             uploadImagePreview.src = ""
             uploadImage.children[2].style.display = 'none';
             uploadImageInput.value = "";

@@ -1,4 +1,11 @@
 /* Header  */
+.form-control {
+    width: 90%;
+}
+
+.card {
+    width: 95%;
+}
 body {
     overflow-x: hidden;
 }
@@ -99,6 +106,10 @@ div[upload-image] div {
    border: 1 px solid #ddd;
    display: none;
 }
+
+div[upload-image] div[update] {
+    display: block;
+ }
 
 div[upload-image] div img {
     width: 100%;
