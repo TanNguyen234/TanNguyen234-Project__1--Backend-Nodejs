@@ -34,7 +34,7 @@ block main
 
    .form-group 
      label(for="position") Vị trí
-     input(type="number" class="form-control" id="position" name="position" min="1" placeholder="Tự động tăng")
+     input(type="number" class="form-control" id="position" name="position" min="1" placeholder="Tự động tăng" value=product.position)
    .form-group.form-check.form-check-inline 
      input(type="radio" class="form-check-input" id="statusAcive" name="status" value="acive" checked=(product.status == 'active' ? true : false))
      label(for="statusAcive" class="from-check-label") Hoạt động
