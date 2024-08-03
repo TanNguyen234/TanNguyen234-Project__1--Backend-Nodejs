@@ -24,5 +24,6 @@ router.get("/edit/:id", controller.edit);//Get để lấy trang sửa sp
 
 router.patch("/edit/:id", upload.single('thumbnail'), validate.createPost, controller.editPatch);//Có thể trùng route nhưng phải khác phương thức
 
+router.get("/detail/:id", controller.detail);//Get để lấy trang chi tiết sp
 
 module.exports = router;//export hàm router

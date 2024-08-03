@@ -195,3 +195,25 @@ module.exports.editPatch = async (req, res) => {//Try catch khi update, ...
 
     res.redirect(`back`)
 }
+
+// [GET] /admin/products/detail/:id
+
+module.exports.detail = async (req, res) => {
+    try {
+        const find = {
+         deleted: false,
+         _id: req.params.id
+        }
+ 
+        const product = await Product.findOne(find);
+        console.log(product)
+ 
+        res.render('admin/pages/product/detail', {
+         pageTitle: product.title,
+         product: product
+        })
+     } catch (err) {
+         req.flash("error", "Sản phẩm không tồn tại");
+         res.redirect(`${systemConfig.prefixAdmin}/products`)
+     }
+}
