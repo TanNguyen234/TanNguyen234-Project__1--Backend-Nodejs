@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended : false}));;
 
 app.use(methodOverride("_method")); //Sử dụng library method override
 
-app.set("views", "./views");//Thiết lập vào thắng folder views vì view là folder show ra website
+app.set("views", `${__dirname}/views`);//Thiết lập vào thắng folder views vì view là folder show ra website
 app.set("view engine", "pug");//Template engine có thể là PUG, EJS, Handlebars...
 
 //Flash thư viện cho thông báo cho express js
@@ -36,7 +36,8 @@ app.use(flash());
 // App Local Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;//Tạo biến toàn cục dùng được ở mọi file [pug] để linh hoạt path
 
-app.use(express.static("public"));// Nhúng file tĩnh để để hiểu rằng folder public chứa file tĩnh để public ra bên ngoài
+//_dirname là cấu trúc thư mục của project dùng được local và online
+app.use(express.static(`${__dirname}/public`));// Nhúng file tĩnh để để hiểu rằng folder public chứa file tĩnh để public ra bên ngoài
 
 //Routes
 routeAdmin(app);//Khi định import rồi thì truyền app vào
