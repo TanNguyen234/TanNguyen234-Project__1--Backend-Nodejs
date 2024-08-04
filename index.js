@@ -18,7 +18,7 @@ const route = require("./routes/client/index.route.js");//import file route chí
 const { getMaxListeners } = require("./models/product.model.js");
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended : false}));;
