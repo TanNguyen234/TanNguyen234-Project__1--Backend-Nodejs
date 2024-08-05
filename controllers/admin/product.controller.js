@@ -32,8 +32,20 @@ module.exports.index = async (req, res) => {
         limitItem: 4
     }, req.query, countProducts)
 
+    //Sort
+    let sort = {
+
+    }
+
+    if (req.query.sortKey && req.query.sortValue) {
+      sort[req.query.sortKey] = req.query.sortValue
+    } else {
+      sort.position = "desc"
+    }
+    //End Sort
+
     const products = await Product.find(find)
-     .sort( { position: "desc" } )
+     .sort(sort)
      .limit(objectPagination.limitItem)
      .skip(objectPagination.skip);   //Dùng find(hàm của mongoose) để lọc các dữ liệu từ database
 
