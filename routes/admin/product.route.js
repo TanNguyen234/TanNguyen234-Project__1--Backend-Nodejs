@@ -31,6 +31,7 @@ router.get("/edit/:id", controller.edit); //Get để lấy trang sửa sp
 router.patch(
   "/edit/:id",
   upload.single("thumbnail"),
+  uploadCloud.upload,
   validate.createPost,
   controller.editPatch
 ); //Có thể trùng route nhưng phải khác phương thức
