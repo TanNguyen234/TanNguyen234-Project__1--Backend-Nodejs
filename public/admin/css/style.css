@@ -137,3 +137,6 @@ img[upload-image-preview] + span {
    border: 1px solid #ddd;
 }
 /* End Preview Anh */
+.tox {
+    width: 90%;
+}
