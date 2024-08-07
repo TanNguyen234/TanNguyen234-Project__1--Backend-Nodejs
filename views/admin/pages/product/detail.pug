@@ -30,7 +30,8 @@ block main
           b #{product.position}
     
     if(product.description)
-       div(class="mb-4") #{product.description}
+       div(class="mb-4") !{product.description}
+       //-Dùng !{để chuyển mã html hiển thị được cho tinymce}
     
     a(href=`${prefixAdmin}/products/edit/${product.id}` class="btn btn-warning btn-sm") Chỉnh sửa
 
