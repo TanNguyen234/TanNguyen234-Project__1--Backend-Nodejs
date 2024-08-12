@@ -6,6 +6,10 @@ mongoose.plugin(slug);//Tạo slug
 
 const schemaProduct = new mongoose.Schema({//Thiết lập schema
   title: String,
+  product_category_id: {
+    type: String,
+    default: ''
+  },
   description: String,
   price: Number,
   discountPercentage: Number,
