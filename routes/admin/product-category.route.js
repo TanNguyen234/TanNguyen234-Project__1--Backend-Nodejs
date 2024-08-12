@@ -14,11 +14,17 @@ router.get("/", controller.index); //Nếu đúng route là "/" thì sẽ dẫn 
 router.get('/create', controller.create)
 
 router.post(
-    "/create",
-    upload.single("thumbnail"),
-    uploadCloud.upload,
-    validate.createPost,
-    controller.createPost
-  );
+  "/create",
+  upload.single("thumbnail"),
+  uploadCloud.upload,
+  validate.createPost,
+  controller.createPost
+);
+
+router.get('/edit/:id', controller.edit)
+
+router.patch('/edit/:id', upload.single("thumbnail"),
+  uploadCloud.upload,
+  validate.createPost, controller.editPatch)
 
 module.exports = router; //export hàm router
