@@ -13,4 +13,8 @@ router.get("/edit/:id", controller.edit);//Nếu đúng route là "/" thì sẽ 
 
 router.patch("/edit/:id", controller.editPatch);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
+router.get("/permissions", controller.permissions);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
+router.post("/permissions", controller.permissionsPost);//Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
 module.exports = router;//export hàm router
