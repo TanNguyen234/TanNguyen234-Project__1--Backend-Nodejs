@@ -14,10 +14,6 @@ const accountSchema = new mongoose.Schema({//Thiết lập schema
   avatar: String,
   role_id: String,
   status: String,
-  permissions: {
-    type: Array,
-    default: []
-  },
   deleted: {
     type: Boolean,
     default: false
