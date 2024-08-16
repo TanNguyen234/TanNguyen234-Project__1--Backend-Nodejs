@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer"); //import multer
 const upload = multer();
 
-const uploadCloud = require('../../middlewares/admin/uploadCloud.middleware.js');
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js");
 const controller = require("../../controllers/admin/accounts.controller.js");
 const validate = require("../../Validates/admin/accounts.validate.js");
 
@@ -17,6 +17,16 @@ router.post(
   uploadCloud.upload,
   validate.createPost,
   controller.createPost
+); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
+router.get("/edit/:id", controller.edit); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
+router.patch(
+  "/edit/:id",
+  upload.single("avatar"),
+  uploadCloud.upload,
+  validate.editPatch,
+  controller.editPatch
 ); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
 module.exports = router; //export hàm router
