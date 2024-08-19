@@ -8,32 +8,36 @@ include ../../mixins/sort.pug
 include ../../mixins/table-tree.pug
 
 block main 
-  +alert-success(5000)
-  
-  h1 Danh mục sản phẩm
+  if(role.permissions.includes('products-category_view'))
+    +alert-success(5000)
+    
+    h1 Danh mục sản phẩm
 
-  .card.mb-3 
-    .card-header Danh sách
-     .card-body
-      .row
-       .col-8
-       div(class="col-4 mb-3 align-right")
-         a(href=`${prefixAdmin}/product-category/create` class="btn btn-outline-success") + Thêm mới
-       .col-12
-         table(class="table table-hover table-sm" checkbox-multi)
-          thead
-            tr
-            th
-              input(type="checkbox" name="checkall") 
-            th STT
-            th Hinh ảnh
-            th Tiêu đề
-            th Vị trí
-            th Trạng thái 
-            th Hành động
+    .card.mb-3 
+      .card-header Danh sách
+      .card-body
+        .row
+        .col-8
+        div(class="col-4 mb-3 align-right")
+         if(role.permissions.includes('products-category_create'))
+          a(href=`${prefixAdmin}/product-category/create` class="btn btn-outline-success") + Thêm mới
+        .col-12
+          table(class="table table-hover table-sm" checkbox-multi)
+            thead
+              tr
+              th
+                input(type="checkbox" name="checkall") 
+              th STT
+              th Hinh ảnh
+              th Tiêu đề
+              th Vị trí
+              th Trạng thái 
+              th Hành động
 
-          tbody 
-            +table-tree(records)
+            tbody 
+              +table-tree(records)
+  else 
+    h1 Bạn không có quyền truy cập
 //- _id
 //- title
 //- parent_id
