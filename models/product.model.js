@@ -29,7 +29,10 @@ const schemaProduct = new mongoose.Schema({//Thiết lập schema
       default: Date.now()
     }
   },
-  deleted: Boolean,
+  deleted: {
+    type: Boolean,
+    default: false
+  },
   deletedBy: {
     account_id: String,
     delete_at: Date
