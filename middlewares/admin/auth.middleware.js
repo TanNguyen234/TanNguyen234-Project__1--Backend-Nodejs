@@ -1,6 +1,6 @@
 const systemConfig = require("../../config/system");
 
-const Accounts = require("../../models/acounts.model");
+const Accounts = require("../../models/accounts.model");
 
 const Roles = require("../../models/roles.model");
 

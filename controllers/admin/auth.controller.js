@@ -1,5 +1,5 @@
 const md5 = require("md5");
-const Account = require("../../models/acounts.model");
+const Account = require("../../models/accounts.model");
 const systemConfig = require("../../config/system");
 
 // [GET] /admin/auth/login

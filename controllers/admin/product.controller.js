@@ -1,4 +1,5 @@
 const Product = require('../../models/product.model');
+const Account = require('../../models/accounts.model');
 const ProductCategory = require('../../models/product-category.model');
 
 const filterStatusHelper = require('../../helpers/filterStatus');
@@ -51,6 +52,16 @@ module.exports.index = async (req, res) => {
      .sort(sort)
      .limit(objectPagination.limitItem)
      .skip(objectPagination.skip);   //Dùng find(hàm của mongoose) để lọc các dữ liệu từ database
+    
+    for (const product of products) {
+        const user = await Account.findOne({
+            _id: product.createdBy.account_id
+        })
+
+        if(user) {
+            product.accountFullName = user.fullName
+        }
+    }
 
     res.render('admin/pages/product/index', {   //Truyền ngược các giá trị lại View
         pageTitle: 'Danh sản phẩm',
@@ -160,6 +171,10 @@ module.exports.createPost = async (req, res) => {
        req.body.position = countProduct + 1;
     } else {
         req.body.position = parseInt(req.body.position);
+    }
+
+    req.body.createdBy = {
+        account_id: res.locals.user.id
     }
 
     const product = new Product(req.body);

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser"); // thư viện này để parser khi server phản hồi về view
 const session = require("express-session");
+const moment = require("moment");
 require("dotenv").config();
 
 const database = require("./config/database");
@@ -41,6 +42,7 @@ app.use(flash());
 
 // App Local Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin; //Tạo biến toàn cục dùng được ở mọi file [pug] để linh hoạt path
+app.locals.moment = moment;
 
 //_dirname là cấu trúc thư mục của project dùng được local và online
 app.use(express.static(`${__dirname}/public`)); // Nhúng file tĩnh để để hiểu rằng folder public chứa file tĩnh để public ra bên ngoài
