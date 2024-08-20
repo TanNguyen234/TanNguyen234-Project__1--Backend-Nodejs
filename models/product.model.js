@@ -29,11 +29,11 @@ const schemaProduct = new mongoose.Schema({//Thiết lập schema
       default: Date.now()
     }
   },
-  deleted: {
-    type: Boolean,
-    default: false
+  deleted: Boolean,
+  deletedBy: {
+    account_id: String,
+    delete_at: Date
   },
-  deleteAt: Date
 }, {timestamps: true});//Hàm mongoose nếu giá trị là true thì nó sẽ tự động lưu lại [ngày tạo] và khi uppdate nó cg tự động lưu [ngày updata]
 
 const Product = mongoose.model("Product", schemaProduct, "products"); //Kết nối tới collection có tên products
