@@ -54,12 +54,27 @@ module.exports.index = async (req, res) => {
      .skip(objectPagination.skip);   //Dùng find(hàm của mongoose) để lọc các dữ liệu từ database
     
     for (const product of products) {
-        const user = await Account.findOne({
+        //Lấy ra thông tin người tạo
+        const userCreated = await Account.findOne({
             _id: product.createdBy.account_id
         })
 
-        if(user) {
-            product.accountFullName = user.fullName
+        if(userCreated) {
+            product.accountFullName = userCreated.fullName
+        }
+        
+        //Lấy ra thông tin người cập nhật gần nhất
+        const updatedBy = product.updatedBy[product.updatedBy.length - 1]
+        //không sao chép dữ liệu mà thay vào đó tạo một tham chiếu (reference) đến đối tượng
+        //nên updatedBy và product.updatedBy[product.updatedBy.length - 1] trỏ đến cùng bộ nhớ và giá trị 
+        //khi một trong 2 thay đổi cái còn lại cũng thay đổi theo 
+        
+        if(updatedBy) {
+            const userUpdated = await Account.findOne({
+                _id: updatedBy.account_id
+            })
+
+            updatedBy.accountFullName = userUpdated.fullName
         }
     }
 
@@ -74,12 +89,18 @@ module.exports.index = async (req, res) => {
 
 // [PATCH] /admin/products/change-status/:status/:id  
 module.exports.changeStatus = async (req, res) => {
-    console.log(req.params);        //Chứa các routes động
-
     const status = req.params.status;
     const id = req.params.id;
 
-    await Product.updateOne({ _id: id }, { status: status })//Do id trong database là _id nên ghi _id và updateOne là hàm mongoose
+    const updated = {
+        account_id: res.locals.user.id,
+        update_at: new Date()
+    }
+
+    await Product.updateOne({ _id: id }, { 
+        status: status,
+        $push: {updatedBy: updated}
+    })//Do id trong database là _id nên ghi _id và updateOne là hàm mongoose
     
     req.flash("success", "Sản phẩm đã được cập nhật trạng thái ! ");
 
@@ -89,18 +110,31 @@ module.exports.changeStatus = async (req, res) => {
 
 // [PATCH] /admin/products/change-multi
 module.exports.changeMulti = async (req, res) => {
+
     const type = req.body.type;
+
     const ids = req.body.ids.split(', '); //conver từ string thành array
+
+    const updated = {
+        account_id: res.locals.user.id,
+        update_at: new Date()
+    }
 
     switch (type) {
         case "active":
-            await Product.updateMany({ _id: { $in: ids } }, { status: "active" })
+            await Product.updateMany({ _id: { $in: ids } }, { 
+                status: "active", 
+                $push: {updatedBy: updated}
+            })
 
             req.flash("success", `Đã cập nhật thành công trạng thái của ${ids.length} sản phẩm`);
 
             break;
         case "inactive":
-            await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" })
+            await Product.updateMany({ _id: { $in: ids } }, { 
+                status: "inactive", 
+                $push: {updatedBy: updated}
+            })
 
             req.flash("success", `Đã cập nhật thành công trạng thái của ${ids.length} sản phẩm`);
 
@@ -119,7 +153,10 @@ module.exports.changeMulti = async (req, res) => {
                let [id, position] = item.split('-');
                position = parseInt(position);
 
-               await Product.updateOne({ _id: id }, { position: position });
+               await Product.updateOne({ _id: id }, { 
+                position: position, 
+                $push: {updatedBy: updated}
+               });
             }
             req.flash("success", `Đã thay đổi thành công vị trí của ${ids.length} sản phẩm`);
             break;
@@ -233,7 +270,16 @@ module.exports.editPatch = async (req, res) => {//Try catch khi update, ...
     }
 
     try {
-        await Product.updateOne({ _id : req.params.id}, req.body);//Vì req.body là object nen truyen thẳng vào
+        const updated = {
+            account_id: res.locals.user.id,
+            update_at: new Date()
+        }
+
+        await Product.updateOne({ _id : req.params.id}, {
+            ...req.body,
+            $push: {updatedBy: updated},//Từ khóa $push của mongoose giúp update push vào
+        });//Vì req.body là object nen truyen thẳng vào
+
         req.flash("success" , "Sản phẩm đã được cập nhật!");
     } catch (error) {
         req.flash("error", "Cập nhật sản phẩm thất bại");
