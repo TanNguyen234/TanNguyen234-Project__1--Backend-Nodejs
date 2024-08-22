@@ -16,6 +16,7 @@ const schemaProduct = new mongoose.Schema({//Thiết lập schema
   stock: Number,
   thumbnail: String,
   status: String,
+  featured: String,
   position: Number,
   slug: {
     type: String,
