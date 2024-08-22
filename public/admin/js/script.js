@@ -172,6 +172,10 @@ if(uploadImage) {
     const uploadImagePreview = uploadImage.querySelector('[upload-image-preview]');
     const update = document.querySelector('[update]');
 
+    if(!uploadImageInput.value) {
+        update.style.display = 'none';
+    }
+
     uploadImageInput.addEventListener('change', (e) => {
 
         uploadImage.children[2].style.display = 'flex';
