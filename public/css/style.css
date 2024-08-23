@@ -15,7 +15,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -137,3 +137,13 @@
     display: block;
 }
 /* End Sub Menu  */
+.product-item {
+    position: relative;
+}
+
+.inner-featured {
+    font-size: 14px;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}

@@ -1,4 +1,5 @@
 const Product = require('../../models/product.model');
+const productsHelper = require('../../helpers/products');
 
 //[GET] /products
 module.exports.index = async (req, res) => {//Tên hàm controller ở đây là index là file chính của product
@@ -8,10 +9,7 @@ module.exports.index = async (req, res) => {//Tên hàm controller ở đây là
         deleted: false
     }).sort({ position: "desc" });
 
-    const newProducts = products.map(item => {
-        item.priceNew = item.price - (item.price * item.discountPercentage / 100).toFixed(1);
-        return item;
-    })
+    const newProducts = productsHelper.newPriceProducts(products)
 
     res.render('client/pages/products/index.pug', {
         pageTitle: "Trang danh sách sản phẩm", //Trả về view cho title=pageTitle ở file layouts/default.pug
