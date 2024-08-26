@@ -13,7 +13,7 @@ block main
 
             if(product.category)
               div(class='inner-category')
-                span Danh mục:
+                span Danh mục:  
                 a(href=`/products/${product.category.slug}`) <b>#{product.category.title}</b>
             if(product.priceNew)
                 div(class="inner-price-new") Giá: #{product.priceNew}$
