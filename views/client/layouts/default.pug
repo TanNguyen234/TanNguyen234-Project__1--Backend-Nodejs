@@ -1,3 +1,5 @@
+include ../mixins/alert.pug
+
 doctype html
 html 
   head
@@ -8,6 +10,8 @@ html
     link(rel="stylesheet", href="/css/style.css")
     //Dấu / là vào public rồi nên không cần ghi public
   body
+    +alert-success(5000)
+
     include ../partials/header.pug
     //Vì chứa nhiều thứ nên phải dùng include để tách nhỏ ra
 

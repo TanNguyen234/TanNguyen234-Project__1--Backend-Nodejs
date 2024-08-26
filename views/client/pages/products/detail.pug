@@ -24,9 +24,9 @@ block main
                 div(class="inner-percent") Giảm tới: <b>#{product.discountPercentage}%</b> 
             if(product.stock >= 0)
                 div(class='inner-stock') Còn lại: <b>#{product.stock}</b> sản phẩm
-            form(action=`cart/add/${product.id}` method="POST")
-               input(class="form-control mb-2" type="number" name='quantity' value='1' min='1' max=product.stock)
-               button(type="submit" class="btn btn-success btn-stock") Thêm vào giỏ hàng
+            form(action=`/cart/add/${product.id}` method="POST")
+                input(class="form-control mb-2" type="number" name='quantity' value='1' min='1' max=product.stock)
+                button(type="submit" class="btn btn-success btn-stock") Thêm vào giỏ hàng
      .container.my-5
        .row 
          .col-12
