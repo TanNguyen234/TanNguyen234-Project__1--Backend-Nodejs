@@ -8,6 +8,7 @@ module.exports.newPriceProducts = (products) => {
 }
 
 module.exports.newPriceProduct = (product) => {
+    console.log(product)
 
     product.priceNew = product.price - (product.price * product.discountPercentage / 100).toFixed(1);
     
