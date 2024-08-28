@@ -81,3 +81,22 @@ module.exports.addPost = async (req, res) => {//Tên hàm controller ở đây l
 
     res.redirect('back');
 }
+
+//[GET] /cart/delete/:productId
+module.exports.delete = async (req, res) => {
+   const cartId = req.cookies.cartId;
+   const productId = req.params.productId
+   try {
+      await Cart.updateOne({
+         _id: cartId
+      },{
+        $pull: {
+            "products": { "product_id": productId } //Xóa một object trong array
+        }
+      })
+      req.flash('success', 'Đã xóa sản phẩm khỏi giỏ hàng thành công')
+   } catch (err) {
+      req.flash('error', 'Xóa sản phẩm thất bại')
+   }
+   res.redirect('back')
+}
