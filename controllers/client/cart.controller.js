@@ -1,4 +1,43 @@
 const Cart = require('../../models/cart.model');
+const Product = require('../../models/product.model');
+
+const productHelper = require('../../helpers/products');
+
+//[GET] /cart
+module.exports.index = async (req, res) => {
+   const cartId = req.cookies.cartId;
+   
+   const cart = await Cart.findOne({ _id: cartId})
+   
+   if(cart.products.length > 0) {
+    var totalPrice = 0
+    for (const item of cart.products) {
+
+        const productId = item.product_id;
+
+        const productInfor = await Product.findOne({
+            _id: productId,
+            status: 'active',
+            deleted: false
+        }).select("title thumbnail slug price discountPercentage")
+
+        const newproductInfor = productHelper.newPriceProduct(productInfor)
+        
+        item.totalPrice = newproductInfor.priceNew * item.quantity
+
+        totalPrice += item.totalPrice;
+
+        item.productInfor = newproductInfor;
+    }
+    
+    cart.totalPrice = totalPrice
+   }
+
+   res.render('client/pages/cart/index', {
+     titlePage: 'Giỏ hàng',
+     cartDetail: cart
+   })
+}
 
 //[POST] /cart/add/:productId
 module.exports.addPost = async (req, res) => {//Tên hàm controller ở đây là index là file chính của home
