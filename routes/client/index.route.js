@@ -5,6 +5,7 @@ const productRoutes = require('./product.route')
 const homeRoutes = require('./home.route')
 const searchRoutes = require('./search.route')
 const cartRoutes = require('./cart.route')
+const checkoutRoutes = require('./checkout.route')
 
 module.exports = (app) => {
     app.use(categoryMiddleWare.category) //Mọi route bên client đều có product categories nên viết như này khác với auth bên admin
@@ -17,4 +18,6 @@ module.exports = (app) => {
     app.use("/search", searchRoutes);//vd: homeRoutes và productRoutes
 
     app.use("/cart", cartRoutes);
+
+    app.use("/checkout", checkoutRoutes);
 }

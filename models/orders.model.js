@@ -3,7 +3,7 @@ const generate = require('../helpers/generate');
 
 const ordersSchema = new mongoose.Schema({//Thiết lập schema
 //   user_id: String,
-  cart_id: String,
+  cart_id: String,//có thể thêm status: 'initial', conform/ statusShipping
   userInfor: {
     fullName: String,
     phone: String,
