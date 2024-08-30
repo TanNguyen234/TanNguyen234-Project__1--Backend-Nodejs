@@ -1,5 +1,7 @@
 const categoryMiddleWare = require('../../middlewares/client/categories.middleware');
 const cartMiddleWare = require('../../middlewares/client/cart.middleware');
+const userMiddleWare = require('../../middlewares/client/user.middleware');
+
 
 const productRoutes = require('./product.route')
 const homeRoutes = require('./home.route')
@@ -11,6 +13,7 @@ const userRoutes = require('./user.route')
 module.exports = (app) => {
     app.use(categoryMiddleWare.category) //Mọi route bên client đều có product categories nên viết như này khác với auth bên admin
     app.use(cartMiddleWare.cartId)
+    app.use(userMiddleWare.userInfo)
 
     app.use("/", homeRoutes);//Nếu đúng route thì sẽ dẫn đến controller và để tách nhỏ ra theo mô hình MVC thì phải import vào
 

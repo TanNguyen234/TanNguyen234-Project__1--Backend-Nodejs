@@ -8,4 +8,8 @@ router.get("/register", controller.register); //Nếu đúng route là "/" thì 
 
 router.post("/register", validate.registerPost, controller.registerPost); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
+router.get("/login", controller.login); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
+router.post("/login", validate.loginPost, controller.loginPost); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
 module.exports = router; //export hàm router
