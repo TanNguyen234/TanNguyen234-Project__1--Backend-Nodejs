@@ -6,7 +6,7 @@ block main
     
     .container.my-5
      .row.justify-content-center
-      .col-6
+      .col-5
         h1(class='text-center') Đăng nhập tài khoản
         form(action=`/user/login` method="POST")
           div(class="form-group")
@@ -17,3 +17,5 @@ block main
             input(type="password" class="form-control" id="password" name="password" required)
           div(class="form-group")
             button(type="submit" class="btn btn-primary btn-block") Đăng nhập
+          .text-center
+            a(href='/user/password/forgot' class='text-center') Quên mật khẩu?
