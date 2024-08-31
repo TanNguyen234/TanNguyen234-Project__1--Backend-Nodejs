@@ -71,3 +71,9 @@ module.exports.loginPost = async (req, res) => {
     req.flash('success', 'Đã đăng nhập thành công')
     res.redirect('/')
 };
+//[GET] /user/logout
+module.exports.logout = (req, res) => {
+  res.clearCookie('tokenUser');
+  req.flash('success', 'Đã đăng xuất thành công');
+  res.redirect('/');
+}

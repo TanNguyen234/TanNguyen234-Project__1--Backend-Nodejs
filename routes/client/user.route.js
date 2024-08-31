@@ -12,4 +12,6 @@ router.get("/login", controller.login); //Nếu đúng route là "/" thì sẽ d
 
 router.post("/login", validate.loginPost, controller.loginPost); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
+router.get("/logout", controller.logout); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
 module.exports = router; //export hàm router
