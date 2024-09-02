@@ -16,7 +16,6 @@ database.connect();
 
 const routeAdmin = require("./routes/admin/index.route.js"); //import routes chính của admin
 const route = require("./routes/client/index.route.js"); //import file route chính chứa tất cả các route
-const { getMaxListeners } = require("./models/product.model.js");
 
 const app = express();
 const port = process.env.PORT || 3000;

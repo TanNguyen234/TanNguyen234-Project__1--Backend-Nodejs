@@ -5,7 +5,7 @@ const forgotPasswordSchema = new mongoose.Schema({//Thiết lập schema
   otp: String,
   expireAt: {
     type: Date,
-    expires: 180 //Bằng Date truyền bên controller sang + 180 giây
+    expires: () => new Date(Date.now() + 180 * 1000)
   }
 }, {timestamps: true});//Hàm mongoose nếu giá trị là true thì nó sẽ tự động lưu lại [ngày tạo] và khi uppdate nó cg tự động lưu [ngày updata]
 
