@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controller = require("../../controllers/client/user.controller.js");
 const validate = require("../../Validates/client/user.validate.js");
+const authMiddleware = require('../../middlewares/client/auth.middleware')
 
 router.get("/register", controller.register); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
@@ -25,5 +26,7 @@ router.post("/password/otp", validate.otp, controller.otpPasswordPost); //Nếu 
 router.get("/password/reset", controller.resetPassword); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
 router.post("/password/reset", validate.resetPasswordPost, controller.resetPasswordPost); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
+
+router.get("/info", authMiddleware.requireAuth, controller.info); //Nếu đúng route là "/" thì sẽ dẫn đến hàm controller mà ở đây tên hàm là index ở file controller
 
 module.exports = router; //export hàm router

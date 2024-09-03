@@ -2,7 +2,6 @@ const categoryMiddleWare = require('../../middlewares/client/categories.middlewa
 const cartMiddleWare = require('../../middlewares/client/cart.middleware');
 const userMiddleWare = require('../../middlewares/client/user.middleware');
 
-
 const productRoutes = require('./product.route')
 const homeRoutes = require('./home.route')
 const searchRoutes = require('./search.route')
