@@ -1,6 +1,8 @@
 const md5 = require("md5");
 const User = require("../../models/user.model");
 const ForgotPassword = require("../../models/forgot-password.model");
+const Cart = require("../../models/cart.model");
+
 const generateHelper = require("../../helpers/generate");
 const sendMailHelper = require('../../helpers/sendMail')
 
@@ -70,6 +72,24 @@ module.exports.loginPost = async (req, res) => {
     return;
   }
 
+  const cartExist = await Cart.findOne({
+    user_id: user.id
+  })
+
+  if(cartExist) {
+    await Cart.deleteOne({
+      _id: req.cookies.cartId
+    })
+
+    res.cookie('cartId', cartExist.id)
+  } else {
+    await Cart.updateOne({
+      _id: req.cookies.cartId, //ở object-1 Tìm _id đê update
+    }, {
+      user_id: user.id //ở object-2 update trường
+    })
+  }
+
   res.cookie("tokenUser", user.tokenUser);
   req.flash("success", "Đã đăng nhập thành công");
   res.redirect("/");
@@ -78,6 +98,7 @@ module.exports.loginPost = async (req, res) => {
 //[GET] /user/logout
 module.exports.logout = (req, res) => {
   res.clearCookie("tokenUser");
+  res.clearCookie("cartId");
   req.flash("success", "Đã đăng xuất thành công");
   res.redirect("/");
 };
