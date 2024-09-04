@@ -25,8 +25,11 @@ module.exports.loginPost = async (req, res) => {
   };
 
   const user = await Account.findOne(find);
-
-  if (user.status === "inactive") {
+  
+  if(!user) {
+    req.flash("error", "Email hoặc mật khẩu không đúng");
+    res.redirect("back");
+  } else if (user.status == "inactive") {
     req.flash("error", "Tài khoản đã bị khóa");
     res.redirect("back");
   } else if (user) {
@@ -35,9 +38,6 @@ module.exports.loginPost = async (req, res) => {
     res.cookie("token", user.token); //Trả token về frontend luu vào máy
     
     res.redirect(`${systemConfig.prefixAdmin}/dashboard`);
-  } else {
-    req.flash("error", "Email hoặc mật khẩu không đúng");
-    res.redirect("back");
   }
 };
 // [GET] /admin/auth/logout
