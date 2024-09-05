@@ -239,17 +239,15 @@
 }
 
 .inner-outgoing {
-    position: relative;
-    height: 40px;
+    float: right;
 }
 
 .inner-outgoing .inner-content {
-    display: inline-block;
     background-color: #f4667e;
     color: white;
     border-radius: 10px;
-    position: absolute;
-    right: 0;
+    clear: right;
+    float: right;
 }
 
 .chat .inner-root form {
