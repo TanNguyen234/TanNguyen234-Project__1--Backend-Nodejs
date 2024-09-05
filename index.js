@@ -49,6 +49,11 @@ app.use(express.static(`${__dirname}/public`)); // Nhúng file tĩnh để để
 //Routes
 routeAdmin(app); //Khi định import rồi thì truyền app vào
 route(app); //sử dụng route truyền app vào để sử dụng ở file index.route.js
+app.get('*', (req, res) => {
+  res.render('client/pages/errors/404', {
+    titlePage: '404 Not Found',
+  })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
