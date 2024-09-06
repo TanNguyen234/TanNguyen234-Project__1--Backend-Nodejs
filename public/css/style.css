@@ -211,6 +211,8 @@
 
 .inner-body {
     padding: 10px;
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 .inner-root {
@@ -259,7 +261,7 @@
     outline: #f4667e;
     border-radius: 10px;
     border: 1px solid  #6a6868;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .chat .inner-root button {
