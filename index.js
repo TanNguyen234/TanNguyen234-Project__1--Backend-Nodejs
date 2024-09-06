@@ -6,6 +6,9 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser"); // thư viện này để parser khi server phản hồi về view
 const session = require("express-session");
 const moment = require("moment");
+const http = require('http');
+const { Server } = require("socket.io");
+
 require("dotenv").config();
 
 const database = require("./config/database");
@@ -19,6 +22,14 @@ const route = require("./routes/client/index.route.js"); //import file route ch�
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+//SocketIO
+const server = http.createServer(app);
+const io = new Server(server);
+io.on('connection', (socket) => {
+  console.log(socket.id);
+})
+//End Socket
 
 //TinyMCE trình soạn thảo văn bản có file /tinymce/tinymce.min.js
 app.use(
@@ -55,6 +66,6 @@ app.get('*', (req, res) => {
   })
 })
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
