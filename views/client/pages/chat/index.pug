@@ -15,24 +15,28 @@ block main
       .col-12 
        .chat 
         .inner-body
-         .inner-incoming
-          .inner-name Em yêu
-          .inner-content 
-            | A ơi sang nhà e nha, nhà e không có ai ở nhà cả
-         .inner-outgoing
-          .inner-content
-            | Thế à ok e iu
-         .inner-incoming
-          .inner-name Em yêu
-          .inner-content 
-            | Nhanh nha a
-         .inner-outgoing
-          .inner-content
-            | Ck đến r mà thấy ai ở nhà đâu? Cửa khóa mà :(
-         .inner-incoming
-          .inner-name Em yêu
-          .inner-content 
-           | Thì e bảo không ai ở nhà mà
+         each chat in chats
+          if(chat.user_id == user.id)
+           .inner-outgoing.mb-2
+            .inner-content 
+              | #{chat.content}
+          else 
+           .inner-incoming.mb-2
+            .inner-name 
+              | #{chat.infoUser.fullName}
+            .inner-content
+              | #{chat.content}
+        //-  .inner-incoming
+        //-   .inner-name Em yêu
+        //-   .inner-content 
+        //-     | Nhanh nha a
+        //-  .inner-outgoing
+        //-   .inner-content
+        //-     | Ck đến r mà thấy ai ở nhà đâu? Cửa khóa mà :(
+        //-  .inner-incoming
+        //-   .inner-name Em yêu
+        //-   .inner-content 
+        //-    | Thì e bảo không ai ở nhà mà
         .inner-root
           form(class="inner-form" action="")
            input(type="text" placeholder="Nhập nội dung...")
