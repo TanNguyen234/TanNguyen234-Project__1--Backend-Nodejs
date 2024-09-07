@@ -256,16 +256,16 @@
 }
 
 .chat .inner-root input {
-    width: 90%;
+    flex: 1;
+    width: auto;
     padding: 10px;
     outline: #f4667e;
     border-radius: 10px;
     border: 1px solid  #6a6868;
-    margin-top: 10px;
 }
 
 .chat .inner-root button {
-    margin-left: 5px;
+    height: 45px;
     width: 60px;
     border: 0;
     background-color: #f4667e;
@@ -277,3 +277,36 @@
     color: white;
 }
 /* End Chat  */
+/* Ẩn hiện tooltip Emoji */
+.tooltip {
+    right: 48px;
+    bottom: 70px;
+}
+
+.tooltip:not(.shown) {
+    display: none;
+}
+
+.tooltip.shown {
+    display: inline-block;
+    opacity: 1;
+}
+
+.inner-form {
+    display: flex;
+    align-items: center;
+}
+
+.inner-form span{
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    background-color: #f4667e;
+    border-radius: 50%;
+    border: 0;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* End Ẩn hiện tooltip Emoji */

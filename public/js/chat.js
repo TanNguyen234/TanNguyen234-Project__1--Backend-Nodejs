@@ -27,12 +27,33 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     `;
   }
   body.appendChild(div);
-  bodyChat.scrollTop = bodyChat.scrollHeight;//Khi cập nhật tin mới cũng cập nhật scroll
+  bodyChat.scrollTop = bodyChat.scrollHeight; //Khi cập nhật tin mới cũng cập nhật scroll
 });
 // End SERVER_RETURN_MESSAGE
+
 //Scroll Chat To Bottom
-const bodyChat = document.querySelector('.chat .inner-body')
-if(bodyChat) {
-    bodyChat.scrollTop = bodyChat.scrollHeight;  // scroll to bottom on new message
+const bodyChat = document.querySelector(".chat .inner-body");
+if (bodyChat) {
+  bodyChat.scrollTop = bodyChat.scrollHeight; // scroll to bottom on new message
 }
 //End Scroll Chat To Bottom
+
+//Show Icon Chat
+const emoji = document.querySelector("emoji-picker");
+if (emoji) {
+  const input = document.querySelector(".chat input");
+  emoji.addEventListener("emoji-click", (e) => {
+    input.value += e.detail.unicode;
+  });
+}
+
+const buttonIcon = document.querySelector(".chat .inner-root span");
+
+if (buttonIcon) {
+  const tooltip = document.querySelector(".tooltip");
+
+  buttonIcon.onclick = () => {
+    tooltip.classList.toggle("shown");
+  };
+}
+//End Show Icon Chat
