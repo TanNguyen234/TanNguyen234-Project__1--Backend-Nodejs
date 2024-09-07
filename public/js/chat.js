@@ -1,13 +1,15 @@
 // CLIENT_SEND_MESSAGE
 const form = document.querySelector(".chat .inner-form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const content = e.target.elements[0].value;
-  if (content) {
-    socket.emit("CLIENT_SEND_MESSAGE", content);
-    e.target.elements[0].value = "";
-  }
-});
+if(form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const content = e.target.elements[0].value;
+    if (content) {
+      socket.emit("CLIENT_SEND_MESSAGE", content);
+      e.target.elements[0].value = "";
+    }
+  });
+}
 // End CLIENT_SEND_MESSAGE
 // SERVER_RETURN_MESSAGE
 socket.on("SERVER_RETURN_MESSAGE", (data) => {
@@ -57,3 +59,16 @@ if (buttonIcon) {
   };
 }
 //End Show Icon Chat
+
+//Typing
+const input = document.querySelector('.chat .inner-root input')
+if(input) {
+  input.onkeyup = () => {
+    socket.emit('CLIENT_SEND_TYPING', 'show')
+  }
+} 
+
+socket.on('SERVER_RETURN_TYPING', (data) => {
+  console.log(data)
+})
+//End Typing
