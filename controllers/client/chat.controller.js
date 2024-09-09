@@ -24,7 +24,6 @@ module.exports.index = async (req, res) => {
 
         //Typing
         socket.on('CLIENT_SEND_TYPING', (type) => {
-            console.log(type)
             socket.broadcast.emit('SERVER_RETURN_TYPING', {
                 user_id: userId,
                 fullName: fullName,
