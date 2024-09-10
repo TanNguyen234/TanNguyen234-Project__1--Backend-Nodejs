@@ -255,7 +255,7 @@
     padding: 5px;
 }
 
-.chat .inner-root input {
+.chat .inner-root .input-text {
     flex: 1;
     width: auto;
     padding: 10px;
@@ -297,7 +297,27 @@
     align-items: center;
 }
 
-.inner-form span{
+.inner-images {
+    margin-left: 2px;
+    text-align: right;
+    clear: right;
+}
+
+.inner-incoming .inner-images {
+    text-align: left;
+}
+
+.inner-images img {
+    width: 350px;
+    height: auto;
+    object-fit: contain;
+    background: #efefef;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.inner-form .icon {
     width: 45px;
     height: 45px;
     display: inline-block;

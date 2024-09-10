@@ -1,13 +1,28 @@
+import { FileUploadWithPreview } from 'https://unpkg.com/file-upload-with-preview/dist/index.js';
+
+//files-upload-with-preview
+const upload = new FileUploadWithPreview('upload-images', {
+  multiple: true,
+  maxFileCount: 6
+});
+//End files-upload-with-preview
+
 // CLIENT_SEND_MESSAGE
 const form = document.querySelector(".chat .inner-form");
 if (form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    socket.emit("CLIENT_SEND_TYPING", "hidden");
     const content = e.target.elements[0].value;
-    if (content) {
-      socket.emit("CLIENT_SEND_MESSAGE", content);
+    const images = upload.cachedFileArray;
+
+    if (content || images.length > 0) {
+      socket.emit("CLIENT_SEND_MESSAGE", {
+        content: content,
+        images: images
+      });
       e.target.elements[0].value = "";
+      upload.resetPreviewPanel();
+      socket.emit("CLIENT_SEND_TYPING", "hidden");
     }
   });
 }
@@ -16,21 +31,43 @@ if (form) {
 socket.on("SERVER_RETURN_MESSAGE", (data) => {
   const myId = document.querySelector("[my-id]").getAttribute("my-id");
   const body = document.querySelector(".chat .inner-body");
+
   const div = document.createElement("div");
   const boxTyping = document.querySelector(".chat .inner-list-typing");
 
+  let htmlFullName = '';
+  let htmlContent = '';
+  let htmlImages = '';
+
   if (data.user_id == myId) {
     div.classList.add("inner-outgoing");
-    div.innerHTML = `
-          <div class='inner-content'>${data.content}</div>
-        `;
   } else {
     div.classList.add("inner-incoming");
-    div.innerHTML = `
-      <div class='inner-name'> ${data.fullName}</div>
-      <div class='inner-content'>${data.content}</div>
-    `;
+
+    htmlFullName = `<div class='inner-name'> ${data.fullName}</div>`;
   }
+
+  if(data.content) {
+    htmlContent = `<div class='inner-content'> ${data.content}</div>`;
+  }
+
+  if(data.images.length > 0) {
+    htmlImages += `<div class='inner-images'>`;
+
+    for (const image of data.images) {
+        htmlImages += `
+          <img src=${image} alt='image'/>
+        `;
+    }
+
+    htmlImages += `</div>`;
+  }
+
+  div.innerHTML = `
+    ${htmlFullName}
+    ${htmlContent}
+    ${htmlImages}
+  `
 
   body.insertBefore(div, boxTyping); //Phải insert trước cái typing nếu không cái typing sẽ bị đẩy dần lên trên sau khi gửi message
   bodyChat.scrollTop = bodyChat.scrollHeight; //Khi cập nhật tin mới cũng cập nhật scroll
@@ -59,7 +96,7 @@ function showTyping() {
 //Show Icon Chat
 const emoji = document.querySelector("emoji-picker");
 if (emoji) {
-  const input = document.querySelector(".chat input");
+  const input = document.querySelector(".chat .input-text");
   emoji.addEventListener("emoji-click", (e) => {
     input.value += e.detail.unicode;
     
@@ -71,7 +108,7 @@ if (emoji) {
   });
 }
 
-const buttonIcon = document.querySelector(".chat .inner-root span");
+const buttonIcon = document.querySelector(".chat .inner-root .icon");
 
 if (buttonIcon) {
   const tooltip = document.querySelector(".tooltip");
@@ -86,7 +123,7 @@ if (buttonIcon) {
 var timeOut;
 const input = document.querySelector(".chat .inner-root input");
 if (input) {
-  input.onkeyup = () => {
+  input.onkeydown = () => {
     showTyping();
   };
 }

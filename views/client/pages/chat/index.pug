@@ -18,14 +18,24 @@ block main
          each chat in chats
           if(chat.user_id == user.id)
            .inner-outgoing.mb-2
-            .inner-content 
-              | #{chat.content}
+            if(chat.content)
+             .inner-content 
+               | #{chat.content}
+            if(chat.images.length > 0)
+             .inner-images
+                each image in chat.images
+                 img(src=image)
           else 
            .inner-incoming.mb-2
             .inner-name 
               | #{chat.infoUser.fullName}
-            .inner-content
-              | #{chat.content}
+            if(chat.content)
+             .inner-content 
+               | #{chat.content}
+            if(chat.images.length > 0)
+             .inner-images
+                each image in chat.images
+                 img(src=image)
          
          .inner-list-typing
           //- .box-typing 
@@ -36,8 +46,9 @@ block main
           //-   span
         .inner-root
           form(class="inner-form" action="")
-           input(type="text" placeholder="Nhập nội dung...")
-           span
+           input(type="text" placeholder="Nhập nội dung..." class='input-text')
+           div(class="custom-file-container" data-upload-id="upload-images")
+           span(class='icon')
             i(class="fa-regular fa-face-smile icon-chat")
            div(class="tooltip" role="tooltip")
             emoji-picker
