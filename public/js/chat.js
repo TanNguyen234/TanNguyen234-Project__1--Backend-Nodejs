@@ -40,9 +40,9 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
   let htmlImages = '';
 
   if (data.user_id == myId) {
-    div.classList.add("inner-outgoing");
+    div.classList.add("inner-outgoing mb-2");
   } else {
-    div.classList.add("inner-incoming");
+    div.classList.add("inner-incoming mb-2");
 
     htmlFullName = `<div class='inner-name'> ${data.fullName}</div>`;
   }
