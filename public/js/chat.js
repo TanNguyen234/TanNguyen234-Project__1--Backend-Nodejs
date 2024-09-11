@@ -40,9 +40,9 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
   let htmlImages = '';
 
   if (data.user_id == myId) {
-    div.classList.add("inner-outgoing mb-2");
+    div.classList.add("inner-outgoing");
   } else {
-    div.classList.add("inner-incoming mb-2");
+    div.classList.add("inner-incoming");
 
     htmlFullName = `<div class='inner-name'> ${data.fullName}</div>`;
   }
@@ -68,9 +68,11 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     ${htmlContent}
     ${htmlImages}
   `
+  console.log(div)
 
   body.insertBefore(div, boxTyping); //Phải insert trước cái typing nếu không cái typing sẽ bị đẩy dần lên trên sau khi gửi message
   bodyChat.scrollTop = bodyChat.scrollHeight; //Khi cập nhật tin mới cũng cập nhật scroll
+  const gallery = new Viewer(div);//
 });
 // End SERVER_RETURN_MESSAGE
 
@@ -167,3 +169,10 @@ if (elementListTyping) {
   });
 }
 //End Typing
+
+//Preview Images
+const bodyChatPreviewImage = new Viewer(document.querySelector('.chat .inner-body'));
+if(bodyChatPreviewImage) {
+  const gallery = new Viewer(bodyChatPreviewImage);
+}
+//End Preview Images

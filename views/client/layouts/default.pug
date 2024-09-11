@@ -12,7 +12,9 @@ html
 
     link(rel="stylesheet" type="text/css" href="https://unpkg.com/file-upload-with-preview/dist/style.css")
     //-Link cdn cho file-upload-with-preview
-
+    
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css" integrity="sha512-eG8C/4QWvW9MQKJNw2Xzr0KW7IcfBSxljko82RuSs613uOAg/jHEeuez4dfFgto1u6SRI/nXmTr9YPCjs1ozBg==" crossorigin="anonymous" referrerpolicy="no-referrer")
+    //-Link cdn viewerjs
     link(rel="stylesheet", href="/css/style.css")
     //Dấu / là vào public rồi nên không cần ghi public
   body
@@ -38,6 +40,9 @@ html
     
     //- File-upload-with-preview
     script(type="module" src="https://unpkg.com/file-upload-with-preview/dist/index.js")
+
+    //- Viewerjs
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js" integrity="sha512-MdZwHb4u4qCy6kVoTLL8JxgPnARtbNCUIjTCihWcgWhCsLfDaQJib4+OV0O8IS+ea+3Xv/6pH3vYY4LWpU/gbQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
 
     script(type="module" src="/js/chat.js")
     script(src="/js/script.js")
