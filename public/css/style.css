@@ -317,7 +317,8 @@
     margin: 5px;
 }
 
-.inner-form .icon {
+.inner-form .icon,
+.inner-form .icon_images {
     width: 45px;
     height: 45px;
     display: inline-block;
@@ -328,6 +329,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.chat .inner-preview-images {
+    position: relative;;
+}
+
+.chat .inner-preview-images .label-container,
+.chat .inner-preview-images .input-container {
+    display: none;
+}
+
+.chat .inner-preview-images .image-preview {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+}
+
+.chat .inner-preview-images .image-preview-item {
+    width: 90px;
+    background-size: contain;
 }
 /* End Ẩn hiện tooltip Emoji */
 /* Box Typing */

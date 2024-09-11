@@ -21,7 +21,7 @@ if (form) {
         images: images
       });
       e.target.elements[0].value = "";
-      upload.resetPreviewPanel();
+      upload.resetPreviewPanel();//Sau khi gửi thì clear đi ảnh
       socket.emit("CLIENT_SEND_TYPING", "hidden");
     }
   });
