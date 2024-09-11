@@ -7,6 +7,9 @@ block main
     +alert-error(5000)
 
     .container.my-3 
+     //-Vì không có truyền biến nên không là mixin mà là partials
+     include ../../partials/list-btn-users.pug
+
      .row 
       .col-12 
        +box-head('Chat')

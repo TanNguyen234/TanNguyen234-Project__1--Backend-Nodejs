@@ -68,7 +68,6 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     ${htmlContent}
     ${htmlImages}
   `
-  console.log(div)
 
   body.insertBefore(div, boxTyping); //Phải insert trước cái typing nếu không cái typing sẽ bị đẩy dần lên trên sau khi gửi message
   bodyChat.scrollTop = bodyChat.scrollHeight; //Khi cập nhật tin mới cũng cập nhật scroll

@@ -29,7 +29,6 @@ module.exports = (res) => {
                 content: data.content,
                 images: images
             })
-            console.log(data)
         })
 
         //Typing
