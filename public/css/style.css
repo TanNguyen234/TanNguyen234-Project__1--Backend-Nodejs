@@ -438,19 +438,17 @@
     display: inline-block;
 }
 
-.box-user [btn-deleted-friend] {
+.box-user [btn-deleted-friend],
+.box-user [btn-accepted-friend],
+.box-user.refuse [btn-accept-friend],
+.box-user.refuse [btn-refuse-friend],
+.box-user.accept [btn-accept-friend],
+.box-user.accept [btn-refuse-friend]  {
     display: none;
 }
 
-.box-user.refuse [btn-accept-friend] {
-    display: none;
-}
-
-.box-user.refuse [btn-refuse-friend] {
-    display: none;
-}
-
-.box-user.refuse [btn-deleted-friend] {
+.box-user.refuse [btn-deleted-friend],
+.box-user.accept [btn-accepted-friend] {
     display: inline-block;
 }
 /* End Box User */
