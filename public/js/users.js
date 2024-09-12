@@ -22,3 +22,15 @@ if(listBtnCancelFriends.length > 0) {
     })
 }
 //End Chức năng hủy yêu cầu
+//Chức năng từ chối yêu cầu
+const listBtnRefuseFriends = document.querySelectorAll('[btn-refuse-friend]')
+if(listBtnRefuseFriends.length > 0) {
+    listBtnRefuseFriends.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.closest('.box-user').classList.add('refuse')
+            const userId = btn.getAttribute('btn-refuse-friend');
+            socket.emit('CLIENT_REFUSE_FRIEND', userId)
+        })
+    })
+}
+//End Chức năng từ chổi yêu cầu
