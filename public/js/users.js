@@ -46,3 +46,15 @@ if(listBtnAcceptFriends.length > 0) {
     })
 }
 //End Chức năng chấp nhận yêu cầu
+
+//SERVER_RETURN_LENGTH_ACCEPTFRIENDS
+const badgeUserAccept = document.querySelector('[badge-users-accept]')
+if(badgeUserAccept) {
+    const id = badgeUserAccept.getAttribute('badge-users-accept')
+    socket.on('SERVER_RETURN_LENGTH_ACCEPTFRIENDS', (data) => {
+        if(id == data.userId) {
+            badgeUserAccept.innerHTML = data.lengthAcceptFriends;
+        }
+    })
+}
+//End SERVER_RETURN_LENGTH_ACCEPTFRIENDS
