@@ -15,12 +15,18 @@ module.exports.notFriend = async (req, res) => {
   const requestFriends = user.requestFriends;
   const acceptFriends = user.acceptFriends;
 
+  const friendList = [];
+  user.friendList.forEach((friend) => {
+    friendList.push(friend.user_id);
+  });
+
   const users = await Users.find({
     $and: [
       //Từ khóa and kết hợp nhiều điều kiện
       { _id: { $ne: userId } }, //Khác user hiện tại not equal
       { _id: { $nin: requestFriends } }, //not in trong 1 mảng còn not equal đối với 1
       { _id: { $nin: acceptFriends } },
+      { _id: { $nin: friendList } }
     ],
     status: "active",
     deleted: false,
