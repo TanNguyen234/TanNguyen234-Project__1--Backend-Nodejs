@@ -57,4 +57,3 @@ if(badgeUserAccept) {
         }
     })
 }
-//End SERVER_RETURN_LENGTH_ACCEPTFRIENDS
