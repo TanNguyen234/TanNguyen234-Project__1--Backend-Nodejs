@@ -74,6 +74,7 @@ if(dataUserAccept) {
             //Vẽ user ra giao diện
             const div = document.createElement('div');
             div.classList.add('col-6')
+            div.setAttribute('user-id', data.infoUserA._id)
             
             //Phải innerHtml để gián tiếp rồi mới appendChild nếu không sẽ bị lỗi
             div.innerHTML = `
@@ -108,3 +109,15 @@ if(dataUserAccept) {
     })
 }
 //End SERVER_RETURN_INFO_ACCEPTFRIENDS
+// SERVER_RETURN_USER_ID_CANCEL_FRIEND
+socket.on('SERVER_RETURN_USER_ID_CANCEL_FRIEND', (data) => {
+    const userIdB = dataUserAccept.getAttribute('data-users-accept');
+   if(userIdB == data.userIdB) {
+        const boxUserRemove = document.querySelector(`[user-id='${data.userIdA}']`)
+        if(boxUserRemove) {
+        const dataUserAccept = document.querySelector('div[data-users-accept]')
+        dataUserAccept.removeChild(boxUserRemove)
+        }
+   }
+})
+//End SERVER_RETURN_USER_ID_CANCEL_FRIEND

@@ -59,7 +59,7 @@ module.exports = (res) => {
         })
         socket.on('CLIENT_CANCEL_FRIEND', async (userId) => {
             const myUserId = res.locals.user.id;
-            //Xóa id của A vào acceptFriends của B
+            //Xóa id của A trong acceptFriends của B
             const existAinB = await User.findOne({
                 _id: userId,
                 acceptFriends: [myUserId]
@@ -74,7 +74,7 @@ module.exports = (res) => {
                     }
                 })
             }
-            //Xóa id của B vào requestFriend của A  
+            //Xóa id của B trong requestFriend của A  
             const existBinA = await User.findOne({
                 _id: myUserId,
                 requestFriends: [userId]
@@ -97,6 +97,11 @@ module.exports = (res) => {
             socket.broadcast.emit('SERVER_RETURN_LENGTH_ACCEPTFRIENDS', {
                 userId: userId,
                 lengthAcceptFriends: lengthAcceptFriends
+            })
+            //Lấy id của A trả về cho B để biết cái nào mà xóa
+            socket.broadcast.emit('SERVER_RETURN_USER_ID_CANCEL_FRIEND', {
+                userIdB: userId,
+                userIdA: myUserId
             })
         })
         socket.on('CLIENT_REFUSE_FRIEND', async (userId) => {
