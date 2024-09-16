@@ -23,6 +23,9 @@ block main
               .inner-buttons 
                 button(class='btn btn-sm btn-primary mr-1' btn-chat-friend=user.id) Nhắn tin
                 button(class='btn btn-sm btn-danger mr-1' btn-deleteFriend-friend=user.id) Xóa kết bạn
+            div(class='inner-status' status=user.statusOnline)
+              i(class='fa-solid fa-circle')
+
             
 block script
   script(type='module' src="/js/users.js")

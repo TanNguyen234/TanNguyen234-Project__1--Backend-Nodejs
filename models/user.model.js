@@ -24,6 +24,7 @@ const usersSchema = new mongoose.Schema({//Thiết lập schema
       room_chat_id: String,
     }
   ],
+  statusOnline: String,
   deleted: {
     type: Boolean,
     default: false

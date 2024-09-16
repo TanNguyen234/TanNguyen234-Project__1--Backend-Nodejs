@@ -91,12 +91,24 @@ module.exports.loginPost = async (req, res) => {
   }
 
   res.cookie("tokenUser", user.tokenUser);
+
+  await User.updateOne({
+    tokenUser: user.tokenUser
+  },{
+    statusOnline: 'online'
+  })
   req.flash("success", "Đã đăng nhập thành công");
   res.redirect("/");
 };
 
 //[GET] /user/logout
-module.exports.logout = (req, res) => {
+module.exports.logout = async (req, res) => {
+  await User.updateOne({
+    tokenUser: req.cookies.tokenUser
+  },{
+    statusOnline: 'offline'
+  })
+  
   res.clearCookie("tokenUser");
   res.clearCookie("cartId");
   req.flash("success", "Đã đăng xuất thành công");
