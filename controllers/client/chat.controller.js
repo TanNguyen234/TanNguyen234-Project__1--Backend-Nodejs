@@ -3,14 +3,16 @@ const User = require('../../models/user.model')
 
 const chatSocket = require('../../sockets/client/chat.socket')
 
-//[GET] /chat/
+//[GET] /chat/:room_chat_id
 module.exports.index = async (req, res) => {
+    const roomChatId = req.params.roomChatId;
     //socket
-    chatSocket(res);
+    chatSocket(req, res);
     //End Socket
     //Lấy chat từ database
     const chats = await Chat.find({
-        deleted: false,
+        room_chat_id: roomChatId,
+        deleted: false
     })
     
     for (const chat of chats) {
@@ -24,6 +26,6 @@ module.exports.index = async (req, res) => {
 
     res.render('client/pages/chat/index.pug', {
         titlePage: 'Chat',
-        chats: chats
+        chats: chats || []
     })
 }
