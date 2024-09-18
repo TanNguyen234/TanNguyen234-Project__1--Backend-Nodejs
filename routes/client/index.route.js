@@ -11,6 +11,7 @@ const checkoutRoutes = require('./checkout.route')
 const userRoutes = require('./user.route')
 const chatRoutes = require('./chat.route')
 const usersRoutes = require('./users.route');
+const roomsChatRoutes = require('./rooms-chat.route');
 
 const authMiddleware = require('../../middlewares/client/auth.middleware')
 
@@ -35,4 +36,6 @@ module.exports = (app) => {
     app.use("/chat", authMiddleware.requireAuth, chatRoutes)
 
     app.use("/users", authMiddleware.requireAuth, usersRoutes) //Của Chat
+
+    app.use("/rooms-chat", authMiddleware.requireAuth, roomsChatRoutes) //Chat nhóm
 }

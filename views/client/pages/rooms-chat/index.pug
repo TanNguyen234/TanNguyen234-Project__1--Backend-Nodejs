@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+
+    .container.my-3 
+     //-Vì không có truyền biến nên không là mixin mà là partials
+     include ../../partials/list-btn-users.pug
+
+     .row 
+      .col-12 
+       +box-head('Danh sách phòng')
+     .row.mb-3
+      .col-12
+       a(href='/rooms-chat/create' class='btn btn-sm btn-success') Tạo phòng chat
+     
+     .row 
+      .col-6 
+       .box-room 
+        .inner-avatar
+         img(src='/images/avatar.png' alt='phòng A')
+        .inner-info
+         .inner-name Phòng chat 
+         .inner-buttons
+          a(href='#' class='btn btn-primary btn-sm mr-1') Nhắn tin
+         
+block script 
+  script(type="module" src="/js/chat.js")
