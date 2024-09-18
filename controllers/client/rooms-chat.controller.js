@@ -5,8 +5,17 @@ const chatSocket = require("../../sockets/client/chat.socket");
 
 //[GET] /rooms-chat/
 module.exports.index = async (req, res) => {
+  const userId = res.locals.user.id;
+
+  const rooms = await RoomChat.find({
+    typeRoom: 'group',
+    "users.user_id": userId,
+    deleted: false
+  })
+
   res.render("client/pages/rooms-chat/index.pug", {
     titlePage: "Rooms Chat",
+    rooms: rooms
   });
 };
 
@@ -54,6 +63,6 @@ module.exports.createPost = async (req, res) => {
   
   const roomChat = new RoomChat(dataRoom)
   await roomChat.save()
-  
+
   res.redirect(`/chat/${roomChat.id}`)
 };

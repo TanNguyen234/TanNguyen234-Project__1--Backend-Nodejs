@@ -471,6 +471,11 @@
     margin-bottom: 30px;
 }
 
+.box-room .inner-name {
+    overflow: hidden;
+    height: auto;
+}
+
 .box-room .inner-avatar {
     width: 60px;
     height: 60px;
